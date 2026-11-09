@@ -1,0 +1,57 @@
+{
+  "$schema": "https://raw.githubusercontent.com/vicinaehq/vicinae/refs/heads/main/extra/schemas/extension.json",
+  "name": "cantonese",
+  "title": "Cantonese Dictionary",
+  "description": "Search Cantonese characters, words and phrases by jyutping or English definition",
+  "icon": "icon.png",
+  "author": "jtao",
+  "license": "MIT",
+  "platforms": ["Linux"],
+  "commands": [
+    {
+      "name": "cantonese",
+      "title": "Cantonese Lookup",
+      "subtitle": "Cantonese",
+      "description": "Find characters and words by jyutping or English, then paste or copy them",
+      "mode": "view",
+      "keywords": ["jyutping", "canto", "粵語", "廣東話", "chinese"]
+    }
+  ],
+  "preferences": [
+    {
+      "name": "script",
+      "title": "Script",
+      "description": "Which character set to paste and show first",
+      "type": "dropdown",
+      "required": false,
+      "default": "traditional",
+      "data": [
+        { "title": "Traditional", "value": "traditional" },
+        { "title": "Simplified", "value": "simplified" }
+      ]
+    },
+    {
+      "name": "showDetail",
+      "title": "Detail Pane",
+      "label": "Show definitions in a side pane by default",
+      "description": "Toggle at any time with Ctrl+D",
+      "type": "checkbox",
+      "required": false,
+      "default": true
+    }
+  ],
+  "scripts": {
+    "build": "vici build",
+    "dev": "vici develop",
+    "dict": ".venv/bin/python scripts/build_dict.py data assets/dict.json",
+    "test": "esbuild --bundle --platform=node --format=cjs --outfile=.test/test.js test/search.test.ts && node --test .test/test.js"
+  },
+  "dependencies": {
+    "@vicinae/api": "^0.29.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "19.1.17",
+    "typescript": "5.9.2"
+  }
+}
